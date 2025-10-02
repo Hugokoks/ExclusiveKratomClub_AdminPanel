@@ -1,0 +1,32 @@
+.btn {
+  font-style: italic;
+  cursor: pointer;
+  align-self: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  height: 60px;
+  border-radius: 100px;
+  background-color: #fff;
+  font-weight: 700;
+  font-size: 22px;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px 4px #fff;
+}
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.errorMessage {
+  color: rgb(255, 66, 33);
+}
