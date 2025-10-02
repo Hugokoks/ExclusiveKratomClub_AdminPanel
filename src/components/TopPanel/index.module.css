@@ -1,0 +1,15 @@
+.topPanel {
+
+    height: 50px;
+    padding: 20px;
+}
+
+.userIcon {
+
+    border-radius: 100px;
+    width: 60px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: 20px;
+    background-color: white;
+}

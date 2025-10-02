@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+
+:root {
+  --color-primary: #62d462;
+  --color-accent: #ffcb05;
+  --color-bg: #0a0a0a;
+  --color-text: #ffffff;
+  --color-border: #616161;
+}
+
+/*
+  FONTS sizes 
+  100px, 48px, 44px, 38px, 32px 28px 24px 22px 
+
+
+*/
+
+html,
+body {
+  max-width: 100%;
+}
+
+#root {
+  isolation: isolate;
+}
+
+@media (max-width: 768px) {
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Thin.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-ExtraLight.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Light.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Regular.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Medium.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-SemiBold.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Bold.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-ExtraBold.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Thin.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-ThinItalic.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+}
+
+/* ExtraLight - 200 */
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-ExtraLight.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-ExtraLightItalic.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-ExtraLightItalic.woff") format("woff");
+  font-weight: 200;
+  font-style: italic;
+}
+
+/* Light - 300 */
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Light.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-LightItalic.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Regular - 400 */
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Regular.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Italic.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Medium - 500 */
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Medium.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-MediumItalic.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* SemiBold - 600 */
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-SemiBold.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-SemiBoldItalic.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-SemiBoldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Bold - 700 */
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-Bold.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-BoldItalic.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-BoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* ExtraBold - 800 */
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-ExtraBold.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/src/assets/fonts/Sora/Sora-ExtraBoldItalic.woff2") format("woff2"),
+    url("/src/assets/fonts/Sora/Sora-ExtraBoldItalic.woff") format("woff");
+  font-weight: 800;
+  font-style: italic;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Sora";
+  color: var(--color-text);
+  background-color: var(--color-bg);
+
+}
