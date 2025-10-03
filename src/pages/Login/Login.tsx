@@ -9,6 +9,24 @@ export default function Login() {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+
+  /*
+  async function apiCall() {
+
+    try {
+
+
+    }
+    catch (err) {
+
+
+
+    }
+
+
+
+  }
+ */
   return (
     <div className="min-h-screen grid place-items-center">
       <div className="w-full max-w-sm space-y-6 justify-center text-center flex flex-col gap-10">
