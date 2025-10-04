@@ -33,7 +33,7 @@
   font-size: 16px;
   color: #aaaaaa;
   pointer-events: none;
-  background-color: #000;
+  background-color: transparent;
   padding: 0 6px;
   transition: all 0.2s ease;
 }
@@ -41,6 +41,7 @@
 /* Trigger float */
 .input:focus + .userLabel,
 .input:not(:placeholder-shown) + .userLabel {
+  background-color: #000;
   top: -10px;
   font-size: 12px;
   color: #ffffff;

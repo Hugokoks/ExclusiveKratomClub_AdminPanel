@@ -1,10 +1,9 @@
 @import "tailwindcss";
 
-
 :root {
   --color-primary: #62d462;
   --color-accent: #ffcb05;
-  --color-bg: #0a0a0a;
+  --color-bg: #000000;
   --color-text: #ffffff;
   --color-border: #616161;
 }
@@ -26,7 +25,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
   html,
   body {
     max-width: 100%;
@@ -35,7 +33,6 @@ body {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-
   html,
   body {
     max-width: 100%;
@@ -251,5 +248,4 @@ body {
   font-family: "Sora";
   color: var(--color-text);
   background-color: var(--color-bg);
-
 }
