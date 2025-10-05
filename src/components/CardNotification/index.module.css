@@ -1,0 +1,53 @@
+.cartNotification {
+    position: fixed;
+    top: 100px;
+    right: 10px;
+    width: 400px;
+    height: 150px;
+    z-index: 1000;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.086);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05),
+        0 8px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    justify-content: center;
+    padding: 0px 20px;
+    text-align: left;
+}
+
+.cartNotification p {
+    font-size: 17px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.cartNotification button {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.cartNotification button:hover {
+    transform: scale(1.15);
+    transition: all 0.2s ease;
+}
+
+.errorStyle {
+    background-color: rgba(209, 13, 13, 0.342);
+}
+
+.successStyle {
+    background-color: rgba(56, 190, 85, 0.281);
+}

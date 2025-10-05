@@ -26,13 +26,12 @@ export default function InputMain({
       <input
         type={type}
         name={name}
-        required
         className={`${styles.input} ${hasError ? styles.inputError : ""}`}
-        placeholder=" " // důležité kvůli :placeholder-shown
+        placeholder=" "
         autoComplete="on"
         value={value}
         onChange={onChange}
-        ref={ref} // attach the ref if provided
+        ref={ref}
       />
       <label className={styles.userLabel}>{label}</label>
     </div>
