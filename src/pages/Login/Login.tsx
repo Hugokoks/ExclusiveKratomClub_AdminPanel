@@ -1,11 +1,12 @@
 import InputMain from "../../components/Inputs/InputMain/InputMain";
 import styles from "./index.module.css";
 import React, { useState, useRef, useEffect } from "react";
-import { api, isCancel } from "../../config.js";
+import { cliApi, isCancel } from "../../config.js";
 import CardNotification from "../../components/CardNotification/CardNotification.js";
 import { useNotification } from "../../context/NotificationProvider.js";
 import type { AxiosError } from "axios";
 import FullScreenLoader from "../../components/FullScreenLoader/FullScreenLoader.js";
+import { useNavigate } from "react-router-dom";
 
 interface FormErrors {
   username?: boolean;
@@ -27,6 +28,7 @@ export default function Login() {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  const navigate = useNavigate();
   // drzí aktuální běžící request
   const controllerRef = useRef<AbortController | null>(null);
 
@@ -62,11 +64,14 @@ export default function Login() {
     try {
       const payload = { username, password };
       setLoading(true);
-      const res = await api.post("/admin/auth/login", payload, {
+      const res = await cliApi.post("/admin/auth/login", payload, {
         signal: controller.signal,
       });
 
-      // Handle successful login
+
+      const { status } = res.data;
+      if (status === "ok") navigate("/orders");
+
     } catch (err) {
       if (isCancel(err)) return;
 
