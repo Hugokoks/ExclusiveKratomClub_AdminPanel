@@ -1,12 +1,11 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 
 
 /*
   TODO:
     Pridat nove axios instance pro admin service.
-    pridat novy VITE_ADMIN_API_URL variable.
-
+    Pridat novy VITE_ADMIN_API_URL variable.
 */
 
 const ApiUrl = (import.meta.env.VITE_API_URL || "").replace(/\/+$/, "");
@@ -18,9 +17,10 @@ const cliApi = axios.create({
 });
 
 
-const isCancel = (err) =>
-  err?.code === "ERR_CANCELED" ||
-  err?.name === "CanceledError" ||
-  (axios.isCancel ? axios.isCancel(err) : false);
+const isCancel = (err: any): boolean => {
+  if (!err) return false;
 
-export { isCancel, cliApi };
+  return axios.isCancel(err);
+};
+
+export { isCancel, cliApi, AxiosError };

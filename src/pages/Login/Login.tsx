@@ -1,10 +1,9 @@
 import InputMain from "../../components/Inputs/InputMain/InputMain";
 import styles from "./index.module.css";
 import React, { useState, useRef, useEffect } from "react";
-import { cliApi, isCancel } from "../../config.js";
+import { cliApi, isCancel, AxiosError } from "../../config.ts";
 import CardNotification from "../../components/CardNotification/CardNotification.js";
 import { useNotification } from "../../context/NotificationProvider.js";
-import type { AxiosError } from "axios";
 import FullScreenLoader from "../../components/FullScreenLoader/FullScreenLoader.js";
 import { useNavigate } from "react-router-dom";
 
@@ -72,7 +71,8 @@ export default function Login() {
       const { status } = res.data;
       if (status === "ok") navigate("/orders");
 
-    } catch (err) {
+    } catch (err: unknown) {
+
       if (isCancel(err)) return;
 
       if (typeof err === 'object' && err !== null && 'response' in err) {

@@ -19,6 +19,18 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      "@typescript-eslint/no-explicit-any": ["error", {
+        // Povolí 'any' v catch blocích (pro err: unknown)
+        "allowCatchClauses": true,
+        // Povolí 'any' v parametrech funkcí (pro isCancel(err: any))
+        "fixme": "off",
+        "ignoreRestArgs": true,
+        "ignoreArgumentCasting": true,
+        "ignoreArguments": true,
+      }],
+    }
   },
   {},
+
 ]);
