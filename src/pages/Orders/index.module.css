@@ -1,0 +1,19 @@
+.ordersPage {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.title {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.ordersContentWrapper {
+  display: flex;
+  width: 100%;
+  height: 50px;
+}
+.orderNav {
+  display: flex;
+}

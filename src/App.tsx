@@ -1,14 +1,25 @@
 import { Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Orders from "./pages/Orders/Orders";
 import Login from "./pages/Login/Login";
+import ProtectedRoute from "./ProtectedRoute";
+import LoadingPage from "./components/LoadingPage/LoadingPage";
 
 export default function App() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<LoadingPage />}>
       <Routes>
-        <Route path="/orders" element={<Orders />} />
         <Route path="/login" element={<Login />} />
+
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/" element={<Navigate to="/orders" replace />} />
       </Routes>
     </Suspense>
   );

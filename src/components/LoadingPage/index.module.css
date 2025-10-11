@@ -1,0 +1,16 @@
+.loadingPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* full screen */
+  background-color: #000; /* nebo nějaká dark barva, ať to sedí k zbytku webu */
+  color: white;
+}
+
+.loadingText {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}

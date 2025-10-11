@@ -1,7 +1,7 @@
 import InputMain from "../../components/Inputs/InputMain/InputMain";
 import styles from "./index.module.css";
 import React, { useState, useRef, useEffect } from "react";
-import { cliApi, isCancel, AxiosError } from "../../config.ts";
+import { cliAPI, AxiosError } from "../../config.ts";
 import CardNotification from "../../components/CardNotification/CardNotification.js";
 import { useNotification } from "../../context/NotificationProvider.js";
 import FullScreenLoader from "../../components/FullScreenLoader/FullScreenLoader.js";
@@ -48,7 +48,10 @@ export default function Login() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      showNotification({ status: "error", message: "Credentials cannot be empty!" });
+      showNotification({
+        status: "error",
+        message: "Credentials cannot be empty!",
+      });
       return;
     }
 
@@ -63,31 +66,41 @@ export default function Login() {
     try {
       const payload = { username, password };
       setLoading(true);
-      const res = await cliApi.post("/admin/auth/login", payload, {
+      const res = await cliAPI.post("/admin/auth/login", payload, {
         signal: controller.signal,
       });
 
+      const { token } = res.data;
+      if (token && typeof token === "string") {
+        localStorage.setItem("authToken", token);
+        navigate("/orders");
+      } else {
+        showNotification({
+          status: "error",
+          message: "Přihlášení proběhlo, ale nebyl přijat token.",
+        });
+      }
+    } catch (error) {
+      const err = error as AxiosError;
 
-      const { status } = res.data;
-      if (status === "ok") navigate("/orders");
+      if (err.name === "CanceledError") return;
 
-    } catch (err: unknown) {
-
-      if (isCancel(err)) return;
-
-      if (typeof err === 'object' && err !== null && 'response' in err) {
-
+      if (typeof err === "object" && err !== null && "response" in err) {
         const errResponse = (err as AxiosError<ApiErrorData>).response;
         // Zpracování dat z backendu
-        const message = errResponse?.data?.message || "Wrong username or password!";
+        const message =
+          errResponse?.data?.message || "Wrong username or password!";
         const credentialsErr = errResponse?.data?.credentials_err;
         if (credentialsErr) {
           setErrors({ username: true, password: true });
           setPassword("");
         }
-        showNotification({ status: "error", message: message, });
+        showNotification({ status: "error", message: message });
       } else {
-        showNotification({ status: "error", message: "A network error occurred or server is unreachable.", });
+        showNotification({
+          status: "error",
+          message: "A network error occurred or server is unreachable.",
+        });
       }
     } finally {
       setLoading(false);
@@ -122,7 +135,6 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               ref={passwordRef}
               hasError={errors?.password}
-
             />
           </div>
           <button className={styles.btn}>Log in</button>
