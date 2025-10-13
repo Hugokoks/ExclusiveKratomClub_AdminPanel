@@ -25,6 +25,7 @@ body {
 }
 
 @media (max-width: 768px) {
+
   html,
   body {
     max-width: 100%;
@@ -33,6 +34,7 @@ body {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+
   html,
   body {
     max-width: 100%;
@@ -240,7 +242,6 @@ body {
 }
 
 * {
-  margin: 0;
   box-sizing: border-box;
 }
 
