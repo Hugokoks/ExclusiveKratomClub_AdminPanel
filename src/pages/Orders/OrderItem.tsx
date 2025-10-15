@@ -5,7 +5,7 @@ export default function OrderItem() {
     return (
         <div className={styles.orderItem}>
             {/* --- Data objednávky --- */}
-            <div className={`${styles.spanRows} ${styles.gridCell} ml-2`}>EKC 19</div>
+            <div className={`${styles.spanRows} ${styles.gridCell} ml-4`}>EKC19</div>
             <div className={`${styles.spanRows} ${styles.gridCell}`}>2025-10-09 13:34:08</div>
             <div className={`${styles.spanRows} ${styles.gridCell}`}>David</div>
             <div className={`${styles.spanRows} ${styles.gridCell}`}>Koritar</div>

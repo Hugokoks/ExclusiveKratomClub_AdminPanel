@@ -4,23 +4,26 @@ import Orders from "./pages/Orders/Orders";
 import Login from "./pages/Login/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import LoadingPage from "./components/LoadingPage/LoadingPage";
+import CardNotification from "./components/CardNotification/CardNotification";
 
 export default function App() {
   return (
-    <Suspense fallback={<LoadingPage />}>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-
-        <Route
-          path="/orders"
-          element={
-            <ProtectedRoute>
-              <Orders />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/" element={<Navigate to="/orders" replace />} />
-      </Routes>
-    </Suspense>
+    <>
+      <CardNotification />
+      <Suspense fallback={<LoadingPage />}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/" element={<Navigate to="/orders" replace />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 }

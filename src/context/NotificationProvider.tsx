@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-type NotificationProviderProps = {
+interface NotificationProviderProps {
   children: React.ReactNode;
 };
-type NotificationContextValue = {
+interface NotificationContextValue {
   isVisible: boolean;
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
   data: NotificationData;

@@ -1,120 +1,43 @@
 import InputMain from "../../components/Inputs/InputMain/InputMain";
 import styles from "./index.module.css";
-import React, { useState, useRef, useEffect } from "react";
-import { cliAPI, AxiosError } from "../../config.ts";
-import CardNotification from "../../components/CardNotification/CardNotification.js";
+import React, { useState } from "react";
 import { useNotification } from "../../context/NotificationProvider.js";
 import FullScreenLoader from "../../components/FullScreenLoader/FullScreenLoader.js";
-import { useNavigate } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin.tsx";
 
-interface FormErrors {
-  username?: boolean;
-  password?: boolean;
-}
-interface ApiErrorData {
-  message?: string;
-  credentials_err?: boolean; // Tvá custom property z backendu
-  status?: string;
-  valid?: boolean;
-  // ... další pole, které backend posílá
-}
+
+
+
 export default function Login() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [loading, setLoading] = useState<boolean>(false);
   const { showNotification } = useNotification();
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
 
-  const navigate = useNavigate();
-  // drzí aktuální běžící request
-  const controllerRef = useRef<AbortController | null>(null);
+  const { login, isPending, errors, setErrors } = useLogin()
 
-  useEffect(() => {
-    // cleanup na unmount
-    return () => {
-      controllerRef.current?.abort();
-    };
-  }, []);
-
-  async function apiCall(e?: React.FormEvent) {
-    if (e) e.preventDefault();
-
-    const newErrors: FormErrors = {};
-
-    if (password.length === 0) newErrors.password = true;
-    if (username.length === 0) newErrors.username = true;
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      showNotification({
-        status: "error",
-        message: "Credentials cannot be empty!",
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    ////check empty fields before api call
+    if (!username || !password) {
+      setErrors({
+        username: !username,
+        password: !password,
       });
+      showNotification({ status: "error", message: "Přihlašovací údaje nesmí být prázdné!" });
       return;
     }
-
-    // Nulování chyb
     setErrors({});
-
-    // zruš případný starý request
-    controllerRef.current?.abort();
-    const controller = new AbortController();
-    controllerRef.current = controller;
-
-    try {
-      const payload = { username, password };
-      setLoading(true);
-      const res = await cliAPI.post("/admin/auth/login", payload, {
-        signal: controller.signal,
-      });
-
-      const { token } = res.data;
-      if (token && typeof token === "string") {
-        localStorage.setItem("authToken", token);
-        navigate("/orders");
-      } else {
-        showNotification({
-          status: "error",
-          message: "Přihlášení proběhlo, ale nebyl přijat token.",
-        });
-      }
-    } catch (error) {
-      const err = error as AxiosError;
-
-      if (err.name === "CanceledError") return;
-
-      if (typeof err === "object" && err !== null && "response" in err) {
-        const errResponse = (err as AxiosError<ApiErrorData>).response;
-        // Zpracování dat z backendu
-        const message =
-          errResponse?.data?.message || "Wrong username or password!";
-        const credentialsErr = errResponse?.data?.credentials_err;
-        if (credentialsErr) {
-          setErrors({ username: true, password: true });
-          setPassword("");
-        }
-        showNotification({ status: "error", message: message });
-      } else {
-        showNotification({
-          status: "error",
-          message: "A network error occurred or server is unreachable.",
-        });
-      }
-    } finally {
-      setLoading(false);
-    }
+    login({ username, password })
   }
+
   return (
     <div className={styles.loginPage}>
-      <CardNotification />
 
-      {loading && <FullScreenLoader />}
+      {isPending && <FullScreenLoader />}
       <div className={styles.loginBox}>
         <img src="logo.png" width="100" />
         <h1>Log in</h1>
-        <form className={styles.form} onSubmit={apiCall}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.inputWrapper}>
             <InputMain
               label="Username"
@@ -122,7 +45,7 @@ export default function Login() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              ref={usernameRef}
+
               hasError={errors?.username}
             />
           </div>
@@ -133,7 +56,6 @@ export default function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              ref={passwordRef}
               hasError={errors?.password}
             />
           </div>

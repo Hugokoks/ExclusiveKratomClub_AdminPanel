@@ -1,18 +1,77 @@
+import { useState } from "react";
 import ViewScreen from "../../components/ViewScreen/ViewScreen";
 import styles from "./index.module.css";
 import OrderItemList from "./OrderItemList";
 import OrdersNav from "./OrdersNav";
 
+export type SortableColumn = 'date' | 'price' | 'itemCount'
+
+export interface FilterData {
+  id: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  address: string,
+  paymentMethod: string,
+  deliveryMethod: string,
+  status: string,
+  sortBy: SortableColumn,
+  sortOrder: "asc" | "desc",
+}
+export interface Order {
+  id: string;
+  createdAt: string; // Datum přijde z JSONu jako string
+  firstName: string;
+  lastName: string;
+  email: string;
+  deliveryAddress: string;
+  paymentMethod: string;
+  deliveryMethod: string;
+  totalPrice: number;
+  itemCount: number;
+  status: 'Pending' | 'Canceled' | 'Completed';
+
+}
+
 export default function Orders() {
+
+  const [filters, setFilters] = useState<FilterData>({
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    paymentMethod: '',
+    deliveryMethod: '',
+    status: '',
+    sortBy: 'date',
+    sortOrder: 'desc',
+  });
+
+  const handleFilterChange = (name: string, value: string) => {
+    setFilters(prevFilters => ({ ...prevFilters, [name]: value }))
+  }
+  const handleSortChange = (newSortBy: SortableColumn) => {
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      sortBy: newSortBy,
+      // Pokud klikáme na stejný sloupec, otočíme směr řazení.
+      // Jinak nastavíme výchozí sestupné řazení (desc).
+      sortOrder: prevFilters.sortBy === newSortBy && prevFilters.sortOrder === 'desc'
+        ? 'asc'
+        : 'desc',
+    }));
+  };
   return (
     <ViewScreen>
       <div className={styles.ordersPage}>
-        <h2 className={styles.title}>Orders</h2>
         <div className={styles.ordersContentWrapper}>
-          <OrdersNav />
-          <OrderItemList />
-
-
+          <OrdersNav
+            filters={filters}
+            onFilterChange={handleFilterChange}
+            onSortChange={handleSortChange}
+          />
+          <OrderItemList filters={filters} />
         </div>
       </div>
     </ViewScreen>
