@@ -4,30 +4,39 @@ import type { FilterData, Order } from "./Orders";
 import { useQuery } from "@tanstack/react-query";
 import { fetchOrders } from "./api";
 import Loading from "../../components/Loading/Loading";
-import useNotifyOnError from "../../hooks/useNotifyOnError"
+import useNotifyOnError from "../../hooks/useNotifyOnError";
 
 interface OrderItemListProps {
-    filters: FilterData
+  filters: FilterData | null;
 }
 
-
 export default function OrderItemList({ filters }: OrderItemListProps) {
-    const {
-        data: orders,
-        isLoading,
-        isError,
-        error
-    } = useQuery<Order[]>({ queryKey: ['orders', filters], queryFn: () => fetchOrders(filters), });
+  const {
+    data: orders,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<Order[]>({
+    queryKey: ["orders", filters],
+    queryFn: () => fetchOrders(filters),
+  });
 
-    useNotifyOnError({ isError, error })
+  useNotifyOnError({ isError, error });
 
-    if (isLoading) {
-        return <div className="mt-50"><Loading /></div>;
-    }
+  /*
+  if (isLoading) {
+    return (
+      <div className="mt-50">
+        <Loading />
+      </div>
+    );
+  }
+     */
 
-    return <div className={styles.orderItemList}>
-        <OrderItem />
-        <OrderItem />
+  return (
+    <div className={styles.orderItemList}>
+      <OrderItem />
+      <OrderItem />
     </div>
-
+  );
 }
