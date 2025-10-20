@@ -12,7 +12,6 @@ export interface SuccessLoginResponse extends BaseAPIResponse {
 }
 export interface ApiErrorData extends BaseAPIResponse {
   credentials_err?: boolean;
-  status?: string;
   valid: false;
 }
 export interface LoginPayload {

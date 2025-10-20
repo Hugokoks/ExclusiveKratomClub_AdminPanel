@@ -181,8 +181,40 @@
   font-size: 13px;
   column-gap: 15px;
   align-items: center;
-  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
+
+.orderItem:hover {
+
+  background-color: rgba(41, 41, 41, 0.861);
+
+}
+
+.orderItemCompleted {
+  background-color: rgba(56, 190, 85, 0.281);
+  transition: all 0.2s ease-in-out;
+
+}
+
+.orderItemCompleted:hover {
+  opacity: 1;
+  background-color: rgba(56, 190, 85, 0.372);
+
+}
+
+.orderItemCanceled {
+  background-color: rgba(209, 13, 13, 0.342);
+
+}
+
+.orderItemCanceled:hover {
+  background-color: rgba(209, 13, 13, 0.511);
+
+
+}
+
+
+
 
 .gridCell {
   /* Skryj vše, co se nevejde do buňky */

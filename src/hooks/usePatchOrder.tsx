@@ -17,16 +17,13 @@ export default function usePatchOrder() {
         onSuccess: (data: PatchResponse) => {
 
             if (data.valid) {
-                showNotification({ status: "success", message: data.message })
+                showNotification({ status: "ok", message: data.message })
 
                 ////refreshne orders list
                 queryClient.invalidateQueries({ queryKey: ['orders'] });
             }
 
         },
-
-
-
     })
 
     return { pathOrder: mutate, isPending, error, isError };

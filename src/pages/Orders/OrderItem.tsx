@@ -26,7 +26,7 @@ export default function OrderItem({ order }: OrderItemProps) {
 
 
   return (
-    <div className={styles.orderItem}>
+    <div className={`${styles.orderItem} ${order.status === "canceled" && styles.orderItemCanceled} ${order.status === "completed" && styles.orderItemCompleted}`}>
       {/* --- Data objednávky --- */}
       <div className={`${styles.spanRows} ${styles.gridCell} ml-4`}>{order.id}</div>
       <div className={`${styles.spanRows} ${styles.gridCell}`}>
@@ -64,7 +64,9 @@ export default function OrderItem({ order }: OrderItemProps) {
       <div className={styles.orderStatus}>
         <span>{order.status}</span>
       </div>
-      {/* --- Akce a Status v posledním sloupci --- */}
+
+
+      {/* --- Akce a Status*/}
       <div className={styles.actionsCell}>
         <div className={styles.actionsBubble}>
           <button onClick={handleConfirm} className={styles.bubbleButton}>

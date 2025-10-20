@@ -29,13 +29,13 @@ export interface Order {
 }
 export interface SuccessResponse {
 
-    status: "ok";
     message: string;
     orders: Order[];
+    status: string;
+    valid: boolean;
 
 }
 export interface PatchResponse {
-    status: string;
     message: string;
     valid: boolean;
 }
