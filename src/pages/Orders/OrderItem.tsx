@@ -1,48 +1,68 @@
 import styles from "./index.module.css";
 import { Check, X, SquarePen, RotateCw } from "lucide-react";
+import type { Order, OrderStatus } from "./types";
+import usePatchOrder from "../../hooks/usePatchOrder";
+import useNotifyOnError from "../../hooks/useNotifyOnError";
 
-export default function OrderItem() {
-  const handleConfirm = () => console.log("Confirming order:");
-  const handleCancel = () => console.log("Canceling order:");
-  const handleReset = () => console.log("Resetting order:");
+
+interface OrderItemProps {
+  order: Order
+}
+
+export default function OrderItem({ order }: OrderItemProps) {
+
+
+  const { pathOrder, isPending, error, isError } = usePatchOrder();
+  useNotifyOnError({ isError, error });
+
+
+  function handlePatch(operation: OrderStatus) {
+
+    pathOrder({ id: order.id, status: operation })
+  }
+  const handleConfirm = () => handlePatch("completed");
+  const handleCancel = () => handlePatch("canceled");
+  const handleReset = () => handlePatch("pending");
+
+
   return (
     <div className={styles.orderItem}>
       {/* --- Data objednávky --- */}
-      <div className={`${styles.spanRows} ${styles.gridCell} ml-4`}>EKC19</div>
+      <div className={`${styles.spanRows} ${styles.gridCell} ml-4`}>{order.id}</div>
       <div className={`${styles.spanRows} ${styles.gridCell}`}>
-        2025-10-09 13:34:08
+        {order.createdAt}
       </div>
-      <div className={`${styles.spanRows} ${styles.gridCell}`}>David</div>
-      <div className={`${styles.spanRows} ${styles.gridCell}`}>Koritar</div>
+      <div className={`${styles.spanRows} ${styles.gridCell}`}>{order.firstName}</div>
+      <div className={`${styles.spanRows} ${styles.gridCell}`}>{order.lastName}</div>
       <div className={`${styles.spanRows} ${styles.gridCell}`}>
-        koritar.david@seznam.cz
+        {order.email}
       </div>
       <div className={`${styles.spanRows} ${styles.gridCell}`}>
-        Z-BOX Brno, Dolní Heršpice, Vídeňská 132/100 (OC Futurum)
+        {order.deliveryAddress}
       </div>
       <div
         className={`${styles.spanRows} ${styles.gridCell} justify-self-center`}
       >
-        Dobírka
+        {order.paymentMethod}
       </div>
       <div
         className={`${styles.spanRows} ${styles.gridCell} justify-self-center`}
       >
-        pickup
+        {order.deliveryMethod}
       </div>
       <div
         className={`${styles.spanRows} ${styles.gridCell} justify-self-center`}
       >
-        10045
+        {order.totalPrice}
       </div>
       <div
         className={`${styles.spanRows} ${styles.gridCell} justify-self-center`}
       >
-        4
+        {order.itemCount}
       </div>
 
       <div className={styles.orderStatus}>
-        <span>Pending</span>
+        <span>{order.status}</span>
       </div>
       {/* --- Akce a Status v posledním sloupci --- */}
       <div className={styles.actionsCell}>
@@ -50,7 +70,7 @@ export default function OrderItem() {
           <button onClick={handleConfirm} className={styles.bubbleButton}>
             <Check size={16} className={styles.confirmIcon} />
           </button>
-          <button onClick={handleCancel} className={styles.bubbleButton}>
+          <button onClick={handleCancel} className={styles.bubbleButton} >
             <X size={16} className={styles.deleteIcon} />
           </button>
           <button onClick={handleReset} className={styles.bubbleButton}>

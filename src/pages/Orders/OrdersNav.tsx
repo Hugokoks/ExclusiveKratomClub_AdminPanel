@@ -1,12 +1,14 @@
 import styles from "./index.module.css";
-import { ArrowUpDown } from "lucide-react";
-import type { FilterData, SortableColumn } from "./Orders";
+import { Search, RotateCcw } from "lucide-react";
+import type { FilterData, SortableColumn } from "./types";
+import Sortable from "../../components/Sortable/Sortable";
 
 interface OrdersNavProps {
   filters: FilterData;
   onFilterChange: (name: keyof FilterData, value: string) => void;
   onSortChange: (newSortBy: SortableColumn) => void;
   onSearch: () => void;
+  onFilterReset: () => void;
 }
 
 export default function OrdersNav({
@@ -14,31 +16,42 @@ export default function OrdersNav({
   onFilterChange,
   onSortChange,
   onSearch,
+  onFilterReset
 }: OrdersNavProps) {
+
+
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-
     onFilterChange(name as keyof FilterData, value);
+
   };
+
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Zabráníme znovunačtení stránky
-    onSearch(); // Zavoláme funkci pro hledání, kterou jsme dostali z rodiče
+    e.preventDefault();
+    onSearch();
   };
+
 
   return (
     <form className={styles.orderNav} onSubmit={handleSubmit}>
-      <button className={styles.filterBtn} type="submit">
-        Filtrovat
-      </button>
-      <button
-        className={`${styles.filterBtn} ${styles.resetBtn}`}
-        onClick={handleSubmit}
-      >
-        Resetovat filter
-      </button>
+      <div className={styles.filterButtonBox}>
+        <button className={styles.filterBtn} type="submit">
+          <Search size={16} />
+          <span>Filtrovat</span>
+        </button>
+        <button
+          className={`${styles.filterBtn} ${styles.resetBtn}`}
+          onClick={onFilterReset}
+        >
+          <RotateCcw size={16} />
+          <span>Resetovat filter</span>
+        </button>
+      </div>
       <div className={styles.orderNavFilters}>
+
+
         {/* --- ID (Text Input) --- */}
         <div className={`${styles.navHeaderCell} ml-4`}>
           <span>ID</span>
@@ -53,13 +66,12 @@ export default function OrdersNav({
         </div>
 
         {/* --- Datum (Sortable) --- */}
-        <div
-          className={`${styles.navHeaderCell} ${styles.sortableHeader} `}
-          onClick={() => onSortChange("date")}
-        >
-          <span>Datum vytvoření</span>
-          <ArrowUpDown size={14} />
-        </div>
+        <Sortable
+          filters={filters}
+          onSortChange={onSortChange}
+          label="Datum vytvoření"
+          sortValue="date"
+        />
 
         {/* --- Jméno (Text Input) --- */}
         <div className={styles.navHeaderCell}>
@@ -123,8 +135,8 @@ export default function OrdersNav({
             onChange={handleChange}
           >
             <option value="">Vše</option>
-            <option value="dobirka">Dobírka</option>
-            <option value="prevod">Převod</option>
+            <option value="payment-dobirka">Dobírka</option>
+            <option value="payment-prevod">Převod</option>
           </select>
         </div>
 
@@ -138,28 +150,29 @@ export default function OrdersNav({
             onChange={handleChange}
           >
             <option value="">Vše</option>
-            <option value="pickup">pickup</option>
-            <option value="home">home</option>
+            <option value="packeta-pickup">pickup</option>
+            <option value="packeta-home">home</option>
           </select>
         </div>
 
         {/* --- Cena (Sortable) --- */}
-        <div
-          className={`${styles.navHeaderCell} ${styles.sortableHeader} justify-self-center`}
-          onClick={() => onSortChange("price")}
-        >
-          <span>Cena Kč</span>
-          <ArrowUpDown size={14} />
-        </div>
+        <Sortable
+          filters={filters}
+          onSortChange={onSortChange}
+          label="Cena Kč"
+          sortValue="price"
+          style={"justify-self-center"}
+        />
+
 
         {/* --- Položky (Sortable) --- */}
-        <div
-          className={`${styles.navHeaderCell} ${styles.sortableHeader}`}
-          onClick={() => onSortChange("itemCount")}
-        >
-          <span>Položky</span>
-          <ArrowUpDown size={14} />
-        </div>
+        <Sortable
+          filters={filters}
+          onSortChange={onSortChange}
+          label="Položky"
+          sortValue="itemCount"
+
+        />
 
         {/* --- Stav (Dropdown) --- */}
         <div className={styles.navHeaderCell}>

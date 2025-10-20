@@ -15,7 +15,6 @@ export interface ApiErrorData extends BaseAPIResponse {
   status?: string;
   valid: false;
 }
-
 export interface LoginPayload {
   username: string;
   password: string;

@@ -1,0 +1,40 @@
+.navHeaderCell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Mezera mezi popiskem a filtrem */
+    font-weight: 600;
+    font-size: 14px;
+    color: rgb(180, 180, 180);
+}
+
+.sortableHeader {
+    flex-direction: row;
+    /* Chceme text a ikonu vedle sebe */
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+    padding-top: 4px;
+    /* Lehké odsazení, aby to sedělo s ostatními */
+}
+
+.sortableHeader:hover {
+    color: #ffffff;
+}
+
+.activeSortIcon {
+    color: #dba207;
+    stroke-width: 2.5;
+}
+
+
+.inactiveSortIcon {
+    color: rgb(180, 180, 180);
+
+    transition: color 0.2s;
+}
+
+.sortableHeader:hover .inactiveSortIcon {
+    color: white;
+
+}
