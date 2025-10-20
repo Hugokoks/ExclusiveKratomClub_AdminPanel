@@ -40,16 +40,12 @@ export interface PatchResponse {
     valid: boolean;
 }
 
-
-
-
 export interface PatchPayload {
 
     id: string;
     status: OrderStatus;
 
 }
-
 
 const initFilterData: FilterData = {
     id: "",
