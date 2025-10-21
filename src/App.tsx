@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Orders from "./pages/Orders/Orders";
+import OrderDetail from "./pages/OrderDetail/OrderDetail";
 import Login from "./pages/Login/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import LoadingPage from "./components/LoadingPage/LoadingPage";
@@ -22,6 +23,18 @@ export default function App() {
             }
           />
           <Route path="/" element={<Navigate to="/orders" replace />} />
+          <Route
+            path="/order/:id"
+            element={
+              <ProtectedRoute>
+                <OrderDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order"
+            element={<Navigate to="/orders" replace />}
+          />
         </Routes>
       </Suspense>
     </>
