@@ -12,7 +12,7 @@ export default function OrderHeader() {
                 <span className={styles.statusHeader}>Pending</span>
 
                 {/* btns wrapper */}
-                <div className="flex gap-10 ml-auto mr-20">
+                <div className="flex gap-5 ml-auto mr-20">
                     <button className={styles.statusBtn}>
                         <Check size={iconSize} color="rgb(20, 210, 20)" />
                         Potvrdit objednávku
