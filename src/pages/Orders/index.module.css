@@ -1,7 +1,7 @@
 .ordersPage {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 0px 20px;
 }
 
 .title {
@@ -33,13 +33,11 @@
   font-size: 14px;
   color: rgb(180, 180, 180);
   align-items: start;
-
 }
 
 .filterButtonBox {
   display: flex;
   gap: 10px;
-
 }
 
 .filterBtn {
@@ -59,7 +57,6 @@
   align-items: center;
   justify-content: center;
   gap: 3px;
-
 }
 
 .filterBtn:hover {
@@ -135,10 +132,12 @@
 .filterSelect:focus {
   border-color: #dba207;
   /* Zvýraznění při kliknutí */
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(212, 175, 55, 0.18),
-      transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 175, 55, 0.18),
+    transparent
+  );
 
   border-color: rgba(212, 175, 55, 0.554);
   color: #fff;
@@ -170,8 +169,8 @@
 .orderItem {
   height: 120px;
   width: 100%;
-  background-color: rgba(25, 25, 25, 0.799);
-  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05),
+  background-color: rgba(25, 25, 25, 0.243);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.162),
     0 8px 30px rgba(0, 0, 0, 0.25);
   z-index: 100;
   border-radius: 10px;
@@ -185,36 +184,29 @@
 }
 
 .orderItem:hover {
-
-  background-color: rgba(41, 41, 41, 0.861);
-
+  background-color: rgba(25, 25, 25, 0.583);
 }
 
 .orderItemCompleted {
-  background-color: rgba(56, 190, 85, 0.281);
-  transition: all 0.2s ease-in-out;
-
+  background-color: rgba(56, 190, 85, 0.116);
+  box-shadow: inset 0 0 10px rgba(15, 217, 58, 0.226),
+    0 8px 30px rgba(0, 0, 0, 0.25);
 }
 
 .orderItemCompleted:hover {
   opacity: 1;
-  background-color: rgba(56, 190, 85, 0.372);
-
+  background-color: rgba(56, 190, 85, 0.178);
 }
 
 .orderItemCanceled {
-  background-color: rgba(209, 13, 13, 0.342);
-
+  background-color: rgba(203, 18, 18, 0.265);
+  box-shadow: inset 0 0 10px rgba(203, 18, 18, 0.362),
+    0 8px 30px rgba(0, 0, 0, 0.25);
 }
 
 .orderItemCanceled:hover {
-  background-color: rgba(209, 13, 13, 0.511);
-
-
+  background-color: rgba(203, 18, 18, 0.35);
 }
-
-
-
 
 .gridCell {
   /* Skryj vše, co se nevejde do buňky */

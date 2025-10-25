@@ -6,10 +6,13 @@ import Login from "./pages/Login/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import LoadingPage from "./components/LoadingPage/LoadingPage";
 import CardNotification from "./components/CardNotification/CardNotification";
+import FullScreenLoader from "./components/FullScreenLoader/FullScreenLoader";
+import NotFound from "./components/NotFound/NotFound";
 
 export default function App() {
   return (
     <>
+      <FullScreenLoader />
       <CardNotification />
       <Suspense fallback={<LoadingPage />}>
         <Routes>
@@ -24,17 +27,16 @@ export default function App() {
           />
           <Route path="/" element={<Navigate to="/orders" replace />} />
           <Route
-            path="/order/:id"
+            path="/orders/:id"
             element={
               <ProtectedRoute>
                 <OrderDetail />
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/order"
-            element={<Navigate to="/orders" replace />}
-          />
+
+          {/* 404 Not Found Route */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </>

@@ -11,6 +11,10 @@ const adminApiURL = (import.meta.env.VITE_ADMIN_API_URL || "").replace(
   /\/+$/,
   ""
 );
+const assetApiURL = (import.meta.env.VITE_ASSET_API_URL || "").replace(
+  /\/+$/,
+  ""
+);
 
 const cliAPI = axios.create({
   baseURL: cliApiURL,
@@ -40,4 +44,4 @@ adminAPI.interceptors.request.use(
   }
 );
 
-export { cliAPI, adminAPI, AxiosError };
+export { cliAPI, adminAPI, AxiosError, assetApiURL };
