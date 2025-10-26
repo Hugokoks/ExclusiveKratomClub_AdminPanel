@@ -17,12 +17,14 @@ export default function AppNav() {
             <span>Orders</span>
           </NavLink>
         </li>
+        {/*
         <li>
           <NavLink to="/stock" className={styles.link}>
             <Boxes className={styles.icon} size={24} strokeWidth={2.2} />
             <span>Stock</span>
           </NavLink>
         </li>
+         */}
         <li>
           <NavLink to="/products" className={styles.link}>
             <Leaf className={styles.icon} size={24} strokeWidth={2.2} />

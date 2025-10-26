@@ -1,15 +1,22 @@
-import styles from "./index.module.css"
-import { motion } from "framer-motion"
+// src/components/Sortable/SortArrow.tsx
+
+import styles from "./index.module.css"; // Bude mít vlastní CSS modul
+import { motion } from "framer-motion";
 import { ArrowUpDown, ArrowUp } from "lucide-react";
-import type { SortableColumn } from "../../pages/Orders/types";
-interface SortArrowProps {
-    column: SortableColumn;
-    sortBy: SortableColumn;
+import React from "react";
+
+interface SortArrowProps<S extends string> {
+    column: S;
+    sortBy: S;
     sortOrder: 'asc' | 'desc';
 }
 
-// Obalíme ji do 'memo', aby se překreslila jen, když se změní její vlastní props
-export default function SortArrow({ column, sortBy, sortOrder }: SortArrowProps) {
+export default React.memo(function SortArrow<S extends string>({
+    column,
+    sortBy,
+    sortOrder
+}: SortArrowProps<S>) {
+
     if (sortBy !== column) {
         return <ArrowUpDown size={14} className={styles.inactiveSortIcon} />;
     }
@@ -24,4 +31,4 @@ export default function SortArrow({ column, sortBy, sortOrder }: SortArrowProps)
             <ArrowUp size={14} className={styles.activeSortIcon} />
         </motion.div>
     );
-};
+});

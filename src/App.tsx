@@ -8,6 +8,7 @@ import LoadingPage from "./components/LoadingPage/LoadingPage";
 import CardNotification from "./components/CardNotification/CardNotification";
 import FullScreenLoader from "./components/FullScreenLoader/FullScreenLoader";
 import NotFound from "./components/NotFound/NotFound";
+import Products from "./pages/Products/Products";
 
 export default function App() {
   return (
@@ -31,6 +32,15 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <OrderDetail />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute>
+                <Products />
               </ProtectedRoute>
             }
           />

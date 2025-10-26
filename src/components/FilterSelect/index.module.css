@@ -1,0 +1,57 @@
+/* Toto je stejné jako u FilterInput, aby to sedělo */
+.navHeaderCell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgb(180, 180, 180);
+}
+
+/* Toto jsou styly specifické pro select */
+.filterSelect {
+    background-color: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgb(70, 70, 70);
+    color: #e0e0e0;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+
+    /* 1. Skryjeme výchozí šipku */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* 2. Přidáme vlastní šipku (SVG) */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23e0e0e0'%3e%3cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: 1.2em;
+    background-position: right 0.4rem center;
+}
+
+.filterSelect:focus {
+    border-color: #dba207;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(212, 175, 55, 0.18),
+            transparent);
+
+    border-color: rgba(212, 175, 55, 0.554);
+    color: #fff;
+
+    /* Znovu aplikujeme naši šipku, protože focus ji jinak přepíše gradientem */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23e0e0e0'%3e%3cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3e%3c/svg%3e"),
+        linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.18), transparent);
+
+    background-repeat: no-repeat, no-repeat;
+    background-position: right 0.4rem center, center;
+    background-size: 1.2em, 100%;
+}
+
+.filterSelect option {
+    background-color: #252525;
+    color: #e0e0e0;
+}

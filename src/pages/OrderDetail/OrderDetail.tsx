@@ -6,29 +6,31 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchOrder } from "./api";
 import LoadingPage from "../../components/LoadingPage/LoadingPage";
 import NotFound from "../../components/NotFound/NotFound";
+import ViewScreen from "../../components/ViewScreen/ViewScreen";
 
 export default function OrderDetail() {
-  const { id } = useParams();
+    const { id } = useParams();
 
-  const {
-    data: order,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["orderDetail"],
-    queryFn: () => fetchOrder(id as string),
-    retry: 2,
-    select: (data) => data.order,
-  });
+    const {
+        data: order,
+        isLoading,
+        isError,
+    } = useQuery({
+        queryKey: ["orderDetail"],
+        queryFn: () => fetchOrder(id as string),
+        retry: 2,
+        select: (data) => data.order,
+    });
 
-  if (isLoading) return <LoadingPage />;
-  if (isError) return <NotFound />;
 
-  return (
-    <div className={styles.OrderDetailPage}>
-      <TopPanel />
-      <OrderContainer order={order} />
-    </div>
-  );
+    if (isLoading) return <LoadingPage />;
+    if (isError) return <NotFound />;
+
+    return (
+
+        <div className={styles.OrderDetailPage}>
+            <TopPanel />
+            <OrderContainer order={order} />
+        </div>
+    );
 }

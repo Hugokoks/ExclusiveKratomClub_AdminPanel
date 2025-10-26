@@ -1,0 +1,35 @@
+.navHeaderCell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Mezera mezi popiskem a filtrem */
+    font-weight: 600;
+    font-size: 14px;
+    color: rgb(180, 180, 180);
+}
+
+.filterInput {
+    background-color: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgb(70, 70, 70);
+    color: #e0e0e0;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    width: 100%;
+    /* Vyplní celou šířku buňky */
+    outline: none;
+    /* Odstraní výchozí ohraničení při fokusu */
+    transition: border-color 0.2s;
+}
+
+.filterInput:focus {
+    border-color: #dba207;
+    /* Zvýraznění při kliknutí */
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(212, 175, 55, 0.18),
+            transparent);
+
+    border-color: rgba(212, 175, 55, 0.554);
+    color: #fff;
+}

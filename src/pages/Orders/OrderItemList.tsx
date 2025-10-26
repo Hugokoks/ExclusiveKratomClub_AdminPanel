@@ -1,4 +1,3 @@
-import styles from "./index.module.css";
 import OrderItem from "./OrderItem";
 import type { FilterData, Order } from "./types";
 import { useQuery } from "@tanstack/react-query";
@@ -50,18 +49,16 @@ const OrderItemList = memo(function ({ filters }: OrderItemListProps) {
   }
 
   return (
-    <div className={styles.orderItemList}>
-      <div className={styles.orderItemList}>
-        {orders.length === 0 ? (
-          <div className={styles.message}>
-            Nebyly nalezeny žádné objednávky.
-          </div>
-        ) : (
-          orders.map((order: Order) => (
-            <OrderItem key={order.id} order={order} />
-          ))
-        )}
-      </div>
+    <div className="mt-3 flex flex-col gap-3">
+      {orders.length === 0 ? (
+        <div >
+          Nebyly nalezeny žádné objednávky.
+        </div>
+      ) : (
+        orders.map((order: Order) => (
+          <OrderItem key={order.id} order={order} />
+        ))
+      )}
     </div>
   );
 });
