@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import styles from "./index.module.css";
 
 export default function ProductItem() {
     return (
-        <div className={styles.productItem}>
+        <Link to="/products/1" className={styles.productItem}>
 
-            <div className={`${styles.spanRows} ${styles.gridCell} ml-4`}>
+            <div className={`${styles.spanRows} ${styles.gridCell} ml-10`}>
                 20
             </div>
             <div className={`${styles.spanRows} ${styles.gridCell} `}>
@@ -26,9 +27,12 @@ export default function ProductItem() {
                 5000
             </div>
             <div className={`${styles.spanRows} ${styles.gridCell} `}>
+                400
+            </div>
+            <div className={`${styles.spanRows} ${styles.gridCell} `}>
                 bulk
             </div>
 
-        </div>
+        </Link>
     );
 }

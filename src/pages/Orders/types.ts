@@ -26,12 +26,7 @@ export interface Order {
   itemCount: number;
   status: OrderStatus;
 }
-export interface SuccessResponse {
-  message: string;
-  orders: Order[];
-  status: string;
-  valid: boolean;
-}
+
 export interface PatchResponse {
   message: string;
   valid: boolean;

@@ -1,65 +1,27 @@
+import React from "react";
 import OrderItem from "./OrderItem";
 import type { FilterData, Order } from "./types";
-import { useQuery } from "@tanstack/react-query";
-import { fetchOrders } from "./api";
-import Loading from "../../components/Loading/Loading";
-import useNotifyOnError from "../../hooks/useNotifyOnError";
-import { memo, useEffect } from "react";
-import { useNotification } from "../../context/NotificationProvider";
+import { QueryList } from "../../components/QueryList/QueryList";
 
 interface OrderItemListProps {
   filters: FilterData | null;
 }
 
-const OrderItemList = memo(function ({ filters }: OrderItemListProps) {
-  const { showNotification } = useNotification();
-  const queryKey = ["orders", filters];
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: queryKey,
-    queryFn: () => fetchOrders(filters),
-    //select: (data: SuccessResponse) => data.orders,
-    retry: 1,
-  });
+// Komponenta se teď stará jen o to, JAK vykreslit JEDEN order
+export default function OrderItemList({ filters }: OrderItemListProps) {
 
-  ////obecny error notify ne pro 404
-  useNotifyOnError({ isError, error });
 
-  ////nastaveni promenych ze success responsu;
-  const orders = data?.orders ?? [];
-  const responseStatus = data?.status;
-  const responseMessage = data?.message;
-  const responseValid = data?.valid;
-
-  ////error navic pri 404
-  useEffect(() => {
-    if (responseValid === false) {
-      showNotification({
-        status: responseStatus,
-        message: responseMessage,
-      });
-    }
-  }, [data]);
-
-  if (isLoading) {
-    return (
-      <div className="mt-50">
-        <Loading />
-      </div>
-    );
-  }
+  const renderOrder = (order: Order) => {
+    return <OrderItem key={order.id} order={order} />;
+  };
 
   return (
-    <div className="mt-3 flex flex-col gap-3">
-      {orders.length === 0 ? (
-        <div >
-          Nebyly nalezeny žádné objednávky.
-        </div>
-      ) : (
-        orders.map((order: Order) => (
-          <OrderItem key={order.id} order={order} />
-        ))
-      )}
-    </div>
+    <QueryList<FilterData, Order>
+      filters={filters}
+      queryKey="orders"
+      endpoint="/admin/orders"
+      notFoundMessage="Nebyly nalezeny žádné objednávky."
+      renderItem={renderOrder}
+    />
   );
-});
-export default OrderItemList;
+}

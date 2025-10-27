@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './index.module.css'; // Importuje styly ze stejné složky
-import type { style } from 'framer-motion/client';
 
 interface FilterInputProps {
     label: string;
@@ -8,6 +7,7 @@ interface FilterInputProps {
     value: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     placeholder?: string;
+    style?: string
 }
 
 
@@ -16,11 +16,12 @@ export default function FilterInput({
     name,
     value,
     onChange,
-    placeholder = "Filtrovat..."
+    placeholder = "Filtrovat...",
+    style = "",
 
 }: FilterInputProps) {
     return (
-        <div className={`${styles.navHeaderCell} ${name === 'id' ? 'ml-2' : ''}`}>
+        <div className={`${styles.navHeaderCell} ${style}`}>
             <span>{label}</span>
             <input
                 type="text"

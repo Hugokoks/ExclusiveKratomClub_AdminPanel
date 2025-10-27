@@ -5,17 +5,17 @@ import { motion } from "framer-motion";
 import { ArrowUpDown, ArrowUp } from "lucide-react";
 import React from "react";
 
-interface SortArrowProps<S extends string> {
-    column: S;
-    sortBy: S;
+interface SortArrowProps<SortableColumn> {
+    column: SortableColumn;
+    sortBy: SortableColumn;
     sortOrder: 'asc' | 'desc';
 }
 
-export default React.memo(function SortArrow<S extends string>({
+export default React.memo(function SortArrow<SortableColumn>({
     column,
     sortBy,
     sortOrder
-}: SortArrowProps<S>) {
+}: SortArrowProps<SortableColumn>) {
 
     if (sortBy !== column) {
         return <ArrowUpDown size={14} className={styles.inactiveSortIcon} />;

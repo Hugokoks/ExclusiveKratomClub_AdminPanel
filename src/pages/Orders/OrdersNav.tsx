@@ -3,6 +3,7 @@ import FilterNav from "../../components/FilterNav/FilterNav";
 import FilterInput from "../../components/FilterInput/FilterInput";
 import FilterSelect from "../../components/FilterSelect/FilterSelect";
 import FilterSortable from "../../components/FilterSortable/FilterSortable";
+import { createChangeHandler } from "../../utils/eventHandler";
 
 interface OrdersNavProps {
   filters: FilterData;
@@ -22,21 +23,8 @@ export default function OrdersNav({
   onFilterReset
 }: OrdersNavProps) {
 
-  // Handler pro TEXTOVÉ inputy
-  const handleTextChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
-    onTextChange(name as keyof FilterData, value);
-  };
-
-  // Handler pro SELECT dropdowny
-  const handleSelectChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const { name, value } = event.target;
-    onSelectChange(name as keyof FilterData, value);
-  };
+  const handleTextChange = createChangeHandler(onTextChange)
+  const handleSelectChange = createChangeHandler(onSelectChange)
 
   return (
     <FilterNav onFilterReset={onFilterReset} gridTemplateColumns={ordersGridColumns} >
@@ -47,10 +35,11 @@ export default function OrdersNav({
         name="id"
         value={filters.id}
         onChange={handleTextChange}
+        style="ml-2"
       />
 
       {/* --- Datum (Sortable) --- */}
-      <FilterSortable
+      <FilterSortable<SortableColumn>
         currentSortBy={filters.sortBy}
         currentSortOrder={filters.sortOrder}
         onSortChange={onSortChange}
@@ -116,7 +105,7 @@ export default function OrdersNav({
       />
 
       {/* --- Cena (Sortable) --- */}
-      <FilterSortable
+      <FilterSortable<SortableColumn>
         currentSortBy={filters.sortBy}
         currentSortOrder={filters.sortOrder}
         onSortChange={onSortChange}
@@ -125,7 +114,7 @@ export default function OrdersNav({
       />
 
       {/* --- Položky (Sortable) --- */}
-      <FilterSortable
+      <FilterSortable<SortableColumn>
         currentSortBy={filters.sortBy}
         currentSortOrder={filters.sortOrder}
         onSortChange={onSortChange}

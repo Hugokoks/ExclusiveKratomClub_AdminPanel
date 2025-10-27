@@ -21,22 +21,6 @@ const buildFiltersFromParams = (params: URLSearchParams): FilterData => {
     sortOrder: (params.get("sortOrder") as "asc" | "desc") || "desc",
   };
 };
-
-
-const cleanFilters = (filters: FilterData) => {
-  const cleaned: Record<string, string> = {};
-  (Object.keys(filters) as Array<keyof FilterData>).forEach((key) => {
-    // Nepřidávej prázdné stringy
-    if (filters[key] !== "") {
-      // Nepřidávej výchozí hodnoty řazení
-      if (key === "sortBy" && filters[key] === "date") return;
-      if (key === "sortOrder" && filters[key] === "desc") return;
-
-      cleaned[key] = filters[key];
-    }
-  });
-  return cleaned;
-};
 export default function Orders() {
 
   const {
@@ -49,7 +33,6 @@ export default function Orders() {
   } = useFilterSync<FilterData, SortableColumn>(
     initFilterData,
     buildFiltersFromParams,
-    cleanFilters
   );
 
 
