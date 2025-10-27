@@ -1,16 +1,23 @@
 import ProductItem from "./ProductItem";
-import { useQuery } from "@tanstack/react-query";
+import { QueryList } from "../../components/QueryList/QueryList";
+import type { Product, FilterData } from "./types";
 
-export default function ProductItemList() {
+interface ProductItemListProps {
+  filters: FilterData;
+}
 
+export default function ProductItemList({ filters }: ProductItemListProps) {
+  const renderProduct = (product: Product) => {
+    return <ProductItem key={product.id} product={product} />;
+  };
 
-
-
-    return (
-        <div className="mt-3 flex flex-col gap-3">
-
-            <ProductItem />
-
-        </div>
-    );
+  return (
+    <QueryList<FilterData, Product>
+      filters={filters}
+      queryKey="products"
+      endpoint="/admin/products"
+      notFoundMessage="Nebyly nalezeny žádné produkty."
+      renderItem={renderProduct}
+    />
+  );
 }
